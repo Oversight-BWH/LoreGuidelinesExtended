@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lore Guidelines | Blood Without Honor</title>
+    <style>
+      :root {
+        --bg: #0d0d12;
+        --bg-2: #141820;
+        --panel: rgba(18, 22, 30, 0.9);
+        --panel-strong: rgba(12, 15, 21, 0.98);
+        --line: rgba(206, 167, 93, 0.35);
+        --text: #ecdfc8;
+        --muted: #c1b39a;
+        --soft: #9d8a68;
+        --gold: #d5b26e;
+        --gold-2: #8b5e2a;
+        --red: #7a2d2d;
+        --red-soft: rgba(122, 45, 45, 0.18);
+        --shadow: rgba(0, 0, 0, 0.45);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at top, rgba(128, 92, 46, 0.35), transparent 35%),
+          linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+        color: var(--text);
+        font-family: Georgia, "Times New Roman", serif;
+        line-height: 1.7;
+      }
+
+      a {
+        color: var(--gold);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 290px minmax(0, 1fr);
+        min-height: 100vh;
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        padding: 24px 18px 20px;
+        background: rgba(13, 16, 20, 0.96);
+        border-right: 1px solid var(--line);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding-bottom: 18px;
+        margin-bottom: 18px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .brand-mark {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(145deg, var(--gold), var(--gold-2));
+        color: #16110d;
+        font-size: 1.8rem;
+        font-weight: 700;
+        box-shadow: 0 10px 24px rgba(213, 178, 110, 0.22);
+      }
+
+      .brand h1 {
+        margin: 0;
+        font-size: 1.5rem;
+        line-height: 1.1;
+        letter-spacing: 0.02em;
+      }
+
+      .brand p {
+        margin: 4px 0 0;
+        color: var(--muted);
+        font-size: 0.76rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+
+      .side-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .nav-link {
+        display: block;
+        padding: 10px 11px;
+        border-radius: 10px;
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.015);
+        border: 1px solid transparent;
+        transition: all 0.2s ease;
+      }
+
+      .nav-link:hover {
+        text-decoration: none;
+        border-color: rgba(213, 178, 110, 0.25);
+        background: rgba(213, 178, 110, 0.08);
+      }
+
+      .nav-link.active {
+        background: linear-gradient(90deg, rgba(213, 178, 110, 0.18), rgba(139, 94, 42, 0.08));
+        border-color: rgba(213, 178, 110, 0.35);
+        color: #f6e7bf;
+      }
+
+      .search-panel {
+        margin-top: 24px;
+        border-top: 1px solid var(--line);
+        padding-top: 18px;
+      }
+
+      .search-panel input {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text);
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        padding: 10px 12px;
+        font-size: 0.96rem;
+        outline: none;
+      }
+
+      .search-panel input::placeholder {
+        color: var(--muted);
+      }
+
+      .search-results {
+        margin-top: 12px;
+        display: none;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.02);
+        padding: 10px;
+      }
+
+      .search-results.visible {
+        display: block;
+      }
+
+      .search-results a {
+        display: block;
+        padding: 6px 8px;
+        border-radius: 6px;
+      }
+
+      .search-results a:hover {
+        background: rgba(213, 178, 110, 0.08);
+        text-decoration: none;
+      }
+
+      .content {
+        padding: 28px clamp(18px, 3vw, 42px) 56px;
+      }
+
+      .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 16px;
+        padding-bottom: 18px;
+        margin-bottom: 24px;
+        border-bottom: 2px solid var(--line);
+      }
+
+      .eyebrow {
+        margin: 0 0 6px;
+        color: var(--gold);
+        text-transform: uppercase;
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        font-weight: 700;
+      }
+
+      .page-header h2 {
+        margin: 0;
+        font-size: clamp(2.3rem, 3vw, 3rem);
+        line-height: 1.1;
+        letter-spacing: 0.02em;
+      }
+
+      .print-button {
+        border: 1px solid var(--line);
+        background: rgba(213, 178, 110, 0.08);
+        color: var(--text);
+        border-radius: 9px;
+        padding: 9px 14px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .article {
+        max-width: 1100px;
+      }
+
+      .article section {
+        margin-bottom: 32px;
+      }
+
+      .article h3 {
+        margin: 0 0 14px;
+        font-size: clamp(1.7rem, 2vw, 2.25rem);
+        color: #f2d79d;
+      }
+
+      .article h4 {
+        margin: 0 0 8px;
+        color: var(--gold);
+        font-size: 1.15rem;
+      }
+
+      .article p,
+      .article li {
+        color: var(--text);
+        font-size: 1.02rem;
+        line-height: 1.76;
+      }
+
+      .lead {
+        font-size: 1.14rem;
+        color: #f0d9a9;
+      }
+
+      .page-toc {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 18px 20px;
+        margin-bottom: 22px;
+      }
+
+      .page-toc strong {
+        display: block;
+        color: var(--gold);
+        margin-bottom: 10px;
+        font-size: 1rem;
+      }
+
+      .page-toc ul {
+        margin: 0;
+        padding-left: 18px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 8px 18px;
+      }
+
+      .page-toc li {
+        color: var(--text);
+      }
+
+      .hero-box {
+        padding: 20px 22px;
+        background: linear-gradient(135deg, rgba(139, 94, 42, 0.18), rgba(255,255,255,0.02));
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        box-shadow: 0 18px 30px var(--shadow);
+      }
+
+      .quote-box {
+        border-left: 3px solid var(--gold);
+        background: rgba(213, 178, 110, 0.05);
+        border-radius: 12px;
+        padding: 18px 20px;
+        margin-top: 12px;
+      }
+
+      blockquote {
+        margin: 0;
+        font-size: 1.1rem;
+        color: #f5e4bb;
+      }
+
+      .card-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 16px;
+        margin-top: 14px;
+      }
+
+      .card {
+        padding: 16px 18px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: rgba(14, 18, 24, 0.82);
+        box-shadow: 0 14px 26px rgba(0,0,0,0.12);
+      }
+
+      .table-box {
+        margin-top: 16px;
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: rgba(14, 18, 24, 0.75);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 620px;
+      }
+
+      th, td {
+        padding: 12px 14px;
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid var(--line);
+      }
+
+      thead th {
+        color: var(--gold);
+        background: rgba(213, 178, 110, 0.06);
+      }
+
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      .callout {
+        background: rgba(122, 45, 45, 0.1);
+        border: 1px solid rgba(122, 45, 45, 0.4);
+        border-radius: 12px;
+        padding: 14px 16px;
+        margin-top: 14px;
+      }
+
+      .callout strong {
+        color: #f0c98d;
+      }
+
+      .teaser-list {
+        margin: 12px 0 0 18px;
+        padding: 0;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      @media (max-width: 920px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          position: static;
+          height: auto;
+          border-right: none;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .page-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+
+      @media print {
+        .sidebar, .print-button, .search-panel {
+          display: none !important;
+        }
+
+        .layout {
+          display: block;
+        }
+        body {
+          background: white;
+          color: black;
+        }
+        .content {
+          padding: 0;
+        }
+        .card, .page-toc, .table-box, .quote-box, .hero-box {
+          box-shadow: none;
+          background: white;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">✦</div>
+          <div>
+            <h1>Blood Without Honor</h1>
+            <p>Realm Lore & Continuity</p>
+          </div>
+        </div>
+
+        <nav class="side-nav" aria-label="Main navigation">
+          <a class="nav-link" href="index.html">Home</a>
+          <a class="nav-link" href="government.html">Monarchy & Government</a>
+          <a class="nav-link" href="government-extended.html">Government Extended</a>
+          <a class="nav-link" href="legal-codex.html">Legal Codex</a>
+          <a class="nav-link" href="civil-principles.html">Civil Principles</a>
+          <a class="nav-link" href="religious-laws.html">Religious Laws</a>
+          <a class="nav-link" href="judiciary.html">Judiciary</a>
+          <a class="nav-link" href="legal-procedure.html">Legal Procedure</a>
+          <a class="nav-link" href="quick-reference.html">Quick Reference</a>
+          <a class="nav-link active" href="lore-guidelines.html">Lore Guidelines</a>
+        </nav>
+
+        <div class="search-panel">
+          <label for="searchInput" class="sr-only">Search the wiki</label>
+          <input id="searchInput" type="search" placeholder="Search page..." />
+          <div id="searchResults" class="search-results" aria-live="polite"></div>
+        </div>
+      </aside>
+
+      <main class="content">
+        <header class="page-header">
+          <div>
+            <p class="eyebrow">Worldbuilding & Continuity</p>
+            <h2>Lore Guidelines</h2>
+          </div>
+          <button class="print-button" onclick="window.print()">Print</button>
+        </header>
+
+        <article class="article">
+          <div class="hero-box">
+            <p class="lead">
+              Blood Without Honor is a setting of inherited power, political terror, sacred oaths, and consequence.
+            </p>
+            <p>
+              The Realm is not a place where characters move through history untouched. Every House, title, betrayal,
+              feud, war, and act of mercy contributes to a shared continuity. The world survives by memory, reputation,
+              and the weight of what came before.
+            </p>
+            <p>
+              These guidelines define how lore should be treated: as a living record shaped by actions, judged by
+              consequence, and protected by the proper authority.
+            </p>
+          </div>
+
+          <nav class="page-toc" aria-label="Page sections">
+            <strong>Contents</strong>
+            <ul>
+              <li><a href="#nature">The Nature of the Realm</a></li>
+              <li><a href="#characters">Characters & Immersion</a></li>
+              <li><a href="#knowledge">Knowledge & Power</a></li>
+              <li><a href="#events">Events & Story Progression</a></li>
+              <li><a href="#combat">Combat, Injury & Death</a></li>
+              <li><a href="#justice">Prison, Exile & Justice</a></li>
+              <li><a href="#houses">Houses, Families & Bloodlines</a></li>
+              <li><a href="#politics">Politics & the Throne</a></li>
+              <li><a href="#marriage">Marriage, Alliances & Scandal</a></li>
+              <li><a href="#messaging">Messaging & Decrees</a></li>
+              <li><a href="#retcons">Retcons & Historical Record</a></li>
+              <li><a href="#supernatural">Supernatural & Mystical Lore</a></li>
+              <li><a href="#lore-authority">Lore Department & Administration</a></li>
+            </ul>
+          </nav>
+
+          <section id="nature">
+            <h3>I. The Nature of the Realm</h3>
+            <p>
+              The Realm is shaped by established canon, recorded history, and the consequences of every action taken
+              within it. Every character, House, and event contributes to a shared historical record.
+            </p>
+
+            <div class="card-list">
+              <div class="card">
+                <h4>What qualifies as canon?</h4>
+                <p>Canon consists of established lore, recognized historical precedent, lawful decrees, and the traditions governing the Realm.</p>
+              </div>
+              <div class="card">
+                <h4>Canon-based action</h4>
+                <p>Actions must be supported by recorded history, recognized House tradition, lawful standing, or an accepted IC process.</p>
+              </div>
+              <div class="card">
+                <h4>What does not qualify?</h4>
+                <p>OOC coordination, contradictions of established lore, bypassing House restrictions, or ignoring RP limitations do not create canon.</p>
+              </div>
+            </div>
+
+            <div class="callout">
+              <strong>Why actions matter:</strong> Succession, war, House standing, region control, political alliances, and historical memory all depend on what characters do. The Realm remembers.
+            </div>
+          </section>
+
+          <section id="characters">
+            <h3>II. Characters & Immersion</h3>
+            <p>
+              Lore characters must remain grounded in their origins, backgrounds, and the realities of the setting.
+              Personalities, relationships, and ambitions are permitted when they remain believable in context.
+            </p>
+
+            <div class="card-list">
+              <div class="card">
+                <h4>Character realism</h4>
+                <p>Powergaming, unjustified additions, and empty status-grabbing are prohibited. Extraordinary qualities must be justified.</p>
+              </div>
+              <div class="card">
+                <h4>In-character conduct</h4>
+                <p>During official RP, players are expected to remain IC and act according to their character's knowledge, position, and constraints.</p>
+              </div>
+              <div class="card">
+                <h4>Immersion-breaking acts</h4>
+                <p>Unwarranted violence, OOC interference, impossible knowledge, and random disregard for setting logic all damage the continuity of the Realm.</p>
+              </div>
+            </div>
+
+            <div class="quote-box">
+              <blockquote>
+                “A character is not a weapon. A character is a history that has not yet finished writing itself.”
+              </blockquote>
+            </div>
+          </section>
+
+          <section id="knowledge">
+            <h3>III. Knowledge & Power</h3>
+            <p>
+              Metagaming is the use of knowledge a character would not reasonably possess. That rule is essential to
+              preserving immersion, threats, and the weight of uncertainty.
+            </p>
+
+            <div class="card-list">
+              <div class="card">
+                <h4>Legitimate IC sources</h4>
+                <p>Decrees, ravens, messengers, public proclamations, and direct IC channels are valid sources of information.</p>
+              </div>
+              <div class="card">
+                <h4>What is not valid?</h4>
+                <p>Any information the character could not reasonably know, including OOC coordination or hidden leaks, remains inaccessible IC.</p>
+              </div>
+              <div class="card">
+                <h4>Public decrees</h4>
+                <p>Public decrees are an exception, because they are formally announced to the wider Realm and may thus become common knowledge.</p>
+              </div>
+            </div>
+
+            <div class="callout">
+              <strong>Rule:</strong> If a message or raven was not sent to a character, that character cannot act on its contents without legitimate IC access.
+            </div>
+          </section>
+
+          <section id="events">
+            <h3>IV. Events & Story Progression</h3>
+            <p>
+              Lore events drive the history of the Realm. They allow Houses, factions, and characters to shape the world,
+              gain influence, face consequences, and leave their mark on history.
+            </p>
+
+            <div class="card-list">
+              <div class="card">
+                <h4>What is a lore event?</h4>
+                <p>Any IC scenario that meaningfully affects the status, power, influence, or historical direction of a House, faction, region, or the Realm.</p>
+              </div>
+              <div class="card">
+                <h4>Examples</h4>
+                <p>Wars, sieges, coronations, feasts, marriages, political councils, raids, treaties, and major political decisions.</p>
+              </div>
+              <div class="card">
+                <h4>Recognition</h4>
+                <p>All major events must occur through the proper IC channels and remain consistent with established lore and rule structures.</p>
+              </div>
+            </div>
+
+            <div class="table-box">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Event type</th>
+                    <th>Requirements</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Political conflict</td>
+                    <td>Must be lawful, justified, and contextually plausible.</td>
+                  </tr>
+                  <tr>
+                    <td>Military action</td>
+                    <td>Must respect war rules, territory, and House limits.</td>
+                  </tr>
+                  <tr>
+                    <td>Major ceremony</td>
+                    <td>Must be recognized as a formal world event and remain within setting logic.</td>
+                  </tr>
+                  <tr>
+                    <td>Historical consequence</td>
+                    <td>Only official, recognized IC actions become historical canon.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="combat">
+            <h3>V. Combat, Injury & Death</h3>
+            <p>
+              Combat has consequences. A blade is not a mere cosmetic flourish; it alters the body, the standing, and
+              the fate of a House. The Realm is not a place where violence is clean or painless.
+            </p>
+
+            <div class="card-list">
+              <div class="card">
+                <h4>Injuries</h4>
+                <p>Characters are expected to roleplay injuries realistically according to their severity.</p>
+              </div>
+              <div class="card">
+                <h4>Permanent consequences</h4>
+                <p>Grievous wounds may affect combat ability, officeholdings, inheritance, political standing, and public image.</p>
+              </div>
+              <div class="card">
+                <h4>Perma-death</h4>
+                <p>Death is permanent unless a specific approved mechanism permits otherwise. Death must be recognized by lawful IC process.</p>
+              </div>
+            </div>
+
+            <div class="callout">
+              <strong>Important:</strong> Severe injuries may alter a character's capacity and legitimacy. They are not merely temporary nuisances.
+            </div>
+          </section>
+
+          <section id="justice">
+            <h3>VI. Prison, Exile & Justice</h3>
+            <p>
+              Capture, imprisonment, exile, and execution are legitimate consequences of conflict and political action.
+              The law is not an ornament. It is a weapon, a shield, and a burden.
+            </p>
+
+            <div class="card-list">
+              <div class="card">
+                <h4>Prison</h4>
+                <p>A character may be imprisoned after lawful capture through war, political action, or recognized conflict.</p>
+              </div>
+              <div class="card">
+                <h4>Ransom</h4>
+                <p>Captured persons may be ransomed, exchanged, or negotiated through lawful IC processes.</p>
+              </div>
+              <div class="card">
+                <h4>Trial</h4>
+                <p>Knights and higher-status characters may request trial by combat, trial of the Seven, or other recognized legal proceedings.</p>
+              </div>
+              <div class="card">
+                <h4>Escape</h4>
+                <p>Escapes must remain difficult, plausible, and supported by circumstance. They are not automatic outcomes.</p>
+              </div>
+              <div class="card">
+                <h4>Exile</h4>
+                <p>House exile or placement in exile may be used either in place of death or as a political consequence.</p>
+              </div>
+              <div class="card">
+                <h4>Execution</h4>
+                <p>Serious offenses may result in execution when lawful authority and appropriate process exist.</p>
+              </div>
+            </div>
+          </section>
+
+          <section id="houses">
+            <h3>VII. Houses, Families & Bloodlines</h3>
+            <p>
+              Houses form the foundation of the Realm's political and social structure. Their influence is shaped by
+              ambition, standing, bloodline, and the limitations established by the Realm itself.
+            </p>
+
+            <div class="table-box">
+              <table>
+                <thead>
+                  <tr>
+                    <th>House Type</th>
+                    <th>Core Rule</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Minor House</td>
+                    <td>Limited authority, limited retainers, strict House caps, and a narrower political footprint.</td>
+                  </tr>
+                  <tr>
+                    <td>Paramount House</td>
+                    <td>Greater territorial power, stronger military presence, and wider political influence.</td>
+                  </tr>
+                  <tr>
+                    <td>Crown House</td>
+                    <td>Exclusive royal legitimacy and sovereignty, with recognized succession and authority.</td>
+                  </tr>
+                  <tr>
+                    <td>Wandering Court</td>
+                    <td>Mobility and independence, but reduced structure, authority, and militarized backing.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout">
+              <strong>Important:</strong> House caps and Dynasty limits exist to prevent abuse, excessive power inflation, or artificial political growth. They are not optional suggestions.
+            </div>
+          </section>
+
+          <section id="politics">
+            <h3>VIII. Politics</h3>
+            <p>
+              The Realm is a world where bloodlines, titles, and ambitions constantly intersect. Political life is not a
+              game of decoration; it is a struggle for legitimacy, influence, succession, and survival.
+            </p>
+
+            <div class="card-list">
+              <div class="card">
+                <h4>Crown House dissolution</h4>
+                <p>If a Crown House dissolves, the Throne becomes vacant and the Realm enters an interregnum unless a lawful successor is secured.</p>
+              </div>
+              <div class="card">
+                <h4>Interregnum</h4>
+                <p>During a vacancy, no crowned monarch holds lawful authority. Paramount Houses retain regional power, not royal authority.</p>
+              </div>
+              <div class="card">
+                <h4>Eligible claimants</h4>
+                <p>Potential claimants may include surviving dynasty members, lawful heirs, or Houses meeting the proper requirements for a Throne war.</p>
+              </div>
+            </div>
+
+            <div class="quote-box">
+              <blockquote>
+                “No succession is sacred if it is not sustained by law, legitimacy, and force.”
+              </blockquote>
+            </div>
+          </section>
+
+          <section id="marriage">
+            <h3>IX. Marriage, Alliances & Scandal</h3>
+            <p>
+              Marriage and alliance are not decorative. They are political instruments, social contracts, and sometimes
+              weapons. They must be treated with the seriousness they deserve.
+            </p>
+
+            <div class="card-list">
+              <div class="card">
+                <h4>Political marriages</h4>
+                <p>Valid marriages must be publicly declared, acknowledged by the relevant Houses, and remain within lawful House and Dynasty constraints.</p>
+              </div>
+              <div class="card">
+                <h4>Reputation</h4>
+                <p>Reputation functions as a resource. It may be won, lost, or weaponized. A House's standing is not merely symbolic; it changes what others believe is possible.</p>
+              </div>
+              <div class="card">
+                <h4>Scandal & rumor</h4>
+                <p>Rumor is not the same as fact. A rumor may damage a House or character's image, but it remains just a rumor until recognized by evidence, law, or official record.</p>
+              </div>
+              <div class="card">
+                <h4>Scandal becomes canon</h4>
+                <p>A scandal becomes significant when the public, a House, or the proper authority recognizes it as valid and consequential.</p>
+              </div>
+            </div>
+
+            <div class="callout">
+              <strong>Core principle:</strong> Reputation matters. A ruined name, a broken oath, or a public betrayal can be more dangerous than a blade.
+            </div>
+          </section>
+
+          <section id="messaging">
+            <h3>X. Messaging & Decrees</h3>
+            <p>
+              Ravens and decrees are the lifeblood of political continuity. They are the official channels by which news,
+              law, and command travel across the Realm.
+            </p>
+
+            <div class="card-list">
+              <div class="card">
+                <h4>Ravens</h4>
+                <p>Ravens are the recognized form of long-distance communication. They are binding when properly delivered and acknowledged.</p>
+              </div>
+              <div class="card">
+                <h4>Proclamations</h4>
+                <p>Noble decrees and proclamations are the highest form of political declaration and may shape succession, war, title transfer, and law.</p>
+              </div>
+              <div class="card">
+                <h4>Public vs. private declarations</h4>
+                <p>Public declarations may alter legitimacy, dynastic standing, or political claims. Private declarations may hold weight only if properly acknowledged.</p>
+              </div>
+            </div>
+          </section>
+
+          <section id="retcons">
+            <h3>XI. Retcons & Historical Record</h3>
+            <p>
+              History within the Realm is persistent and consequential. The world remembers what was law, what was done,
+              and what was lost.
+            </p>
+
+            <div class="card-list">
+              <div class="card">
+                <h4>When corrections are valid</h4>
+                <p>A retcon may be used to correct genuine errors, false assumptions, or administrative mistakes that violate continuity.</p>
+              </div>
+              <div class="card">
+                <h4>When corrections are not valid</h4>
+                <p>A retcon may not erase lawful wars, valid executions, rightful enthronements, or meaningful consequences simply because a player dislikes the outcome.</p>
+              </div>
+              <div class="card">
+                <h4>Finality</h4>
+                <p>Once recognized by proper authority, major events become the official record of the Realm and remain part of its memory.</p>
+              </div>
+            </div>
+          </section>
+
+          <section id="supernatural">
+            <h3>XII. Supernatural & Mystical Lore</h3>
+            <p>
+              The Realm may contain whispers of the supernatural, ancient fear, and unresolved mysteries. However, the
+              supernatural is not a casual power system. It is rare, dangerous, and carefully controlled.
+            </p>
+
+            <div class="card-list">
+              <div class="card">
+                <h4>Existence</h4>
+                <p>Elements such as ancient prophecy, unusual bloodline claims, divine omen, or forbidden lore may exist within the setting.</p>
+              </div>
+              <div class="card">
+                <h4>Approval requirement</h4>
+                <p>Any supernatural element introduced into active play must be approved by the Administration before it may be recognized as canon.</p>
+              </div>
+              <div class="card">
+                <h4>Consequences</h4>
+                <p>Supernatural power is not mundane. It changes the balance of nations, politics, and myth. Its use must be rare and meaningful.</p>
+              </div>
+              <div class="card">
+                <h4>No spontaneous claim</h4>
+                <p>Characters may not simply declare dragon blood, magical power, or mystical lineage without evidence, approval, and proper setting justification.</p>
+              </div>
+            </div>
+
+            <div class="callout">
+              <strong>Rule:</strong> The supernatural may exist in the Realm, but it must be rare, intentional, and administratively validated before it becomes true in play.
+            </div>
+          </section>
+
+          <section id="lore-authority">
+            <h3>XIII. Lore Department & Administration</h3>
+            <p>
+              The Lore Department and the Administration serve distinct but connected functions. Together they preserve
+              continuity, interpret the rules of the setting, and ensure that the Realm remains coherent.
+            </p>
+
+            <div class="card-list">
+              <div class="card">
+                <h4>Lore Department</h4>
+                <p>The Lore Department is responsible for maintaining historical consistency, preserving canon, and determining whether a claim, event, or lineage fits established lore.</p>
+              </div>
+              <div class="card">
+                <h4>Administration</h4>
+                <p>The Administration is the final authority over the rules, interpretation, and enforcement of all Realm matters. Its decisions are binding.</p>
+              </div>
+              <div class="card">
+                <h4>Authority split</h4>
+                <p>The Lore Department reviews continuity and world consistency. The Administration resolves disputes, enforces the rules, and approves exceptional cases.</p>
+              </div>
+            </div>
+
+            <div class="table-box">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Agency</th>
+                    <th>Role</th>
+                    <th>Power</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Lore Department</td>
+                    <td>Historic continuity, canon tracking, lore interpretation</td>
+                    <td>Advisory and interpretive authority</td>
+                  </tr>
+                  <tr>
+                    <td>Administration</td>
+                    <td>Final rule enforcement, dispute settlement, exceptional decisions</td>
+                    <td>Final authority</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout">
+              <strong>Final authority:</strong> The Administration has ultimate power to decide final rulings, resolve disputes, enforce continuity, and determine the legitimacy of exceptions. The Lore Department advises and interprets, but the Administration decides.
+            </div>
+
+            <div class="quote-box">
+              <blockquote>
+                “History is not changed by the weak. It is corrected only when the strong and the lawful agree there was a mistake.”
+              </blockquote>
+            </div>
+          </section>
+
+          <section>
+            <h3>Final Principle</h3>
+            <p class="lead">
+              The Realm is not a place for convenience. It is a place for consequence.
+            </p>
+            <p>
+              Every title carries weight. Every oath can be broken. Every bloodline can be challenged. Every war can change
+              the shape of the world. And every action leaves behind a scar in history, whether it is one the world
+              remembers with reverence, with fear, or with hatred.
+            </p>
+          </section>
+        </article>
+      </main>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const searchInput = document.getElementById("searchInput");
+        const resultsBox = document.getElementById("searchResults");
+
+        if (!searchInput || !resultsBox) return;
+
+        const headings = [...document.querySelectorAll("h3, h4")].filter(h => h.textContent.trim());
+
+        const slugify = value =>
+          value
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-|-$/g, "");
+
+        headings.forEach(heading => {
+          if (!heading.id) heading.id = slugify(heading.textContent.trim());
+        });
+
+        const entries = headings.map(heading => ({
+          title: heading.textContent.trim(),
+          href: "#" + heading.id
+        }));
+
+        searchInput.addEventListener("input", (event) => {
+          const query = event.target.value.trim().toLowerCase();
+
+          if (!query) {
+            resultsBox.innerHTML = "";
+            resultsBox.classList.remove("visible");
+            return;
+          }
+
+          const matches = entries.filter(entry =>
+            entry.title.toLowerCase().includes(query)
+          ).slice(0, 8);
+
+          if (!matches.length) {
+            resultsBox.innerHTML = "<a href='#'>No matches found</a>";
+            resultsBox.classList.add("visible");
+            return;
+          }
+
+          resultsBox.innerHTML = matches.map(entry =>
+            `<a href="${entry.href}">${entry.title}</a>`
+          ).join("");
+          resultsBox.classList.add("visible");
+        });
+      });
+    </script>
+  </body>
+</html>
